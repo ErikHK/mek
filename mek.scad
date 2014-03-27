@@ -18,7 +18,7 @@ give=.4;
 sgive = .6;
 
 //plug give
-pgive = .14;
+pgive = .15;
 
 
 pitch=.2;
@@ -53,10 +53,16 @@ module gear1(teeth=10, pitch=.25)
   linear_extrude(height=3)
   gear(number_of_teeth=teeth, diametral_pitch=pitch, flat=true);
 
+  union()
+  {
   translate([0,0,-5])
   //cube([12/1.42,12/1.42,24],center=true);
   cylinder(r=hr+pgive*2, h=24, $fn=4);
+  translate([teeth*2,0,-1])
+  cylinder(r=1.5,h=6);
   }
+  }
+
 
 }
 
