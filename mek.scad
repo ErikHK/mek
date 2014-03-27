@@ -37,6 +37,12 @@ fh = 4;
 fw = hr;
 
 
+//gear hole radius
+ghr = 1.4;
+
+//arrow length
+al = 8;
+
 
 module plate(width=5, height=5)
 {
@@ -147,7 +153,7 @@ module gear1(teeth=10, pitch=.25)
   //cube([12/1.42,12/1.42,24],center=true);
   cylinder(r=hr+pgive*2, h=24, $fn=4);
   translate([teeth*2,0,-1])
-  cylinder(r=1.5,h=6);
+  cylinder(r=ghr+pgive*2,h=6);
   }
   }
 
@@ -205,6 +211,24 @@ difference()
 
 }
 
+
+module arrow()
+{
+  linear_extrude(height=al/3)
+  polygon(points=[[0,0],[-al/4,0],[-al/4,al/2],[-al/2,al/2], [0,al]]);
+
+mirror([1,0,0])
+linear_extrude(height=al/3)
+  polygon(points=[[0,0],[-al/4,0],[-al/4,al/2],[-al/2,al/2], [0,al]]);
+
+translate([0,2*al/3,al/3])
+cylinder(r=ghr, h=3);
+
+
+}
+
+translate([120,0,0])
+arrow();
 
 
 /*
@@ -272,11 +296,11 @@ gear1((hr+dh/2)/2,.25);
 //translate([dh+hr*2,dh+hr*2,20])
 
 
-/*
+
 translate([100,100,0])
 //rotate([0,0,7])
 gear1(floor(((hr+dh/2)*sqrt(2)*2-(hr+dh/2))/2),.25);
-*/
+
 
 //translate([100,50,0])
 //translate([0,0,30])
