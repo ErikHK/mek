@@ -11,26 +11,52 @@ dh = 12;
 //give between two gears
 giveg = .5;
 
-//give
-give=.4;
-
 //shaft give
 sgive = .6;
 
 //plug give
 pgive = .15;
 
+//fastener give (holes)
+fgive = .13;
 
 pitch=.2;
 
 
+////fastener sizes
+//notch width
+notchw = 0;
+
+//notch height
+notchh = 0;
+
+//fastener height
+fh = 4;
+
+//fastener width (sans notch)
+fw = hr;
+
+
+
 module plate(width=5, height=5)
 {
+  
+
+  //total plate width
+  //tpw = (width)*2*hr+(width)*dh+hr*2;
+  tpw = (width)*2*hr+(width)*dh;
+
+  //total plate height
+  tph = (height)*2*hr+(height)*dh;
+
+
   difference()
   {
-  translate([-hr*2-dh/2,-hr*2-dh/2,0])
-  cube([(width)*2*hr+(width)*dh+hr*2, (height)*2*hr+(height)*dh+hr*2, 4]);
+  translate([-hr-dh/2,-hr-dh/2,0])
+  cube([tpw, tph, 4]);
 
+  union()
+  {
   translate([0,0,-5])
   for (i=[0:width-1])
   {
@@ -40,6 +66,68 @@ module plate(width=5, height=5)
       cylinder(r=hr+pgive*2, h=15);
     }
   }
+  }
+  
+  union()
+  {
+  //side fastener holes
+  translate([hr+hr*2*(width-1)+dh*(width-1)+dh/2,-hr,0]){
+    for(i = [0:height-1])
+    {
+      translate([0,i*(dh+hr*2),0])
+      fastener(fgive);
+    }
+  }
+
+
+
+  //top fastener holes
+  translate([-fw,-hr-dh/2,0]){
+    for(i = [0:width-1])
+    {
+      translate([i*(dh+hr*2),0,0])
+      rotate([0,0,-90])
+      fastener(fgive);
+    }
+  }
+  }
+
+  }
+
+
+  //fasteners
+  module fastener(give=0)
+  {
+  rotate([0,0,90])
+  {
+  translate([-0,0,0])
+  linear_extrude(height=4)
+  polygon(points=[[0,0],[0,notchh-give],[-notchw-give,notchh-give],[-notchw-give,fh+notchh+give],[fw/2+give,fh+notchh+give], [fw/2+give,0]]);
+
+  translate([fw,0,0])
+  mirror([1,0,0])
+  linear_extrude(height=4)
+  polygon(points=[[0,0],[0,notchh-give],[-notchw-give,notchh-give],[-notchw-give,fh+notchh+give],[fw/2+give,fh+notchh+give], [fw/2+give,0]]);
+  }
+  }
+
+  //side fasteners
+  translate([-hr-dh/2,-hr,0]){
+    for(i = [0:height-1])
+    {
+      translate([0,i*(dh+hr*2),0])
+      fastener();
+    }
+  }
+
+  //top fasteners
+  translate([-fw,hr+hr*2*(height-1)+dh*(height-1)+dh/2,0]){
+    for(i = [0:width-1])
+    {
+      translate([i*(dh+hr*2),0,0])
+      rotate([0,0,-90])
+      fastener();
+    }
   }
 
 
@@ -157,8 +245,10 @@ rotate([0,0,20])
 gear(number_of_teeth=((hr+dh/2)*4-hr-dh/2)/2, diametral_pitch=.5/2, flat=true);
 */
 
+/*
 translate([-70,80,0])
 gear1( floor(((hr+dh/2)*4-hr-dh/2)/2) );
+*/
 
 //translate([2*(dh+2*hr),0,20])
 //rotate([0,0,30])
@@ -167,14 +257,21 @@ gear1( floor(((hr+dh/2)*4-hr-dh/2)/2) );
 
 
 //cylinder(r=5, h=100);
-//plate(3,2);
+plate(2,2);
 
+//translate([0,hr*4+dh*2,0])
+//plate(2,2);
+
+
+/*
 translate([90,0,0])
 //translate([0,0,10])
 gear1((hr+dh/2)/2,.25);
-
+*/
 
 //translate([dh+hr*2,dh+hr*2,20])
+
+
 /*
 translate([100,100,0])
 //rotate([0,0,7])
@@ -195,7 +292,7 @@ translate([-70,0,0])
 shaft();
 */
 
-
+/*
 translate([-100,30,0])
 {
 hex_screw((hr*2)/sqrt(2),4,55,15,1.5,2,14,4,12,0);
@@ -204,3 +301,4 @@ cylinder(r=6, h=12, $fn=4);
 translate([-25,0,0])
 hex_nut(14,8,4,55,(hr*2)/sqrt(2)+.5,0.5);
 }
+*/
