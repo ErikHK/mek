@@ -68,7 +68,7 @@ module plate(width=5, height=5)
   {
     for(j=[0:height-1])
     {
-      translate([dh*i+2*hr*i,j*(dh+2*hr),0])
+      translate([dh*i+2*hr*i-fh/2,j*(dh+2*hr)+fh/2,0])
       cylinder(r=hr+pgive*2, h=15);
     }
   }
@@ -227,8 +227,8 @@ cylinder(r=ghr, h=3);
 
 }
 
-translate([120,0,0])
-arrow();
+//translate([120,0,0])
+//arrow();
 
 
 //handle for the shaft
@@ -246,6 +246,8 @@ module handle()
 
   translate([0,0,36])
   cylinder(r1=hr, r2=hr+1, h=3);
+  translate([0,0,39])
+  cylinder(r=hr+1, h=1);
   }
 
   translate([-hr-2,-1,30])
@@ -255,7 +257,7 @@ module handle()
 
 }
 
-translate([0,0,30])
+translate([150,0,0])
 handle();
 
 
@@ -311,23 +313,27 @@ gear1( floor(((hr+dh/2)*4-hr-dh/2)/2) );
 //cylinder(r=5, h=100);
 plate(2,2);
 
-//translate([0,hr*4+dh*2,0])
-//plate(2,2);
-
-
 /*
+translate([0,hr*4+dh*2,0])
+plate(2,2);
+translate([hr*4+dh*2,hr*4+dh*2,0])
+plate(2,2);
+*/
+
+//SMALL GEAR 6 TEETH
 translate([90,0,0])
 //translate([0,0,10])
 gear1((hr+dh/2)/2,.25);
-*/
+
 
 //translate([dh+hr*2,dh+hr*2,20])
 
 
 
-translate([100,100,0])
+/////MEDIUM GEAR 10 TEETH
+//translate([100,100,0])
 //rotate([0,0,7])
-gear1(floor(((hr+dh/2)*sqrt(2)*2-(hr+dh/2))/2),.25);
+//gear1(floor(((hr+dh/2)*sqrt(2)*2-(hr+dh/2))/2),.25);
 
 
 //translate([100,50,0])
@@ -339,10 +345,10 @@ gear1(floor(((hr+dh/2)*sqrt(2)*2-(hr+dh/2))/2),.25);
 //translate([0,80,0])
 //plug_cap();
 
-/*
+
 translate([-70,0,0])
 shaft();
-*/
+
 
 /*
 translate([-100,30,0])
