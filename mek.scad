@@ -231,6 +231,34 @@ translate([120,0,0])
 arrow();
 
 
+//handle for the shaft
+module handle()
+{
+  difference()
+  {
+  union()
+  {
+  cylinder(r=hr+1, h=30);
+  translate([0,0,30])
+  cylinder(r1=hr+1, r2=hr, h=3);
+  translate([0,0,33])
+  cylinder(r=hr, h=3);
+
+  translate([0,0,36])
+  cylinder(r1=hr, r2=hr+1, h=3);
+  }
+
+  translate([-hr-2,-1,30])
+  cube([hr*2+4,2,40]);
+  }
+
+
+}
+
+translate([0,0,30])
+handle();
+
+
 /*
 translate([0,0,4])
 //gear(number_of_teeth=10, diametral_pitch=true,  circular_pitch=dh*2*180/(pi*pi), flat=true);
