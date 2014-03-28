@@ -238,26 +238,26 @@ module handle()
   {
   union()
   {
-  cylinder(r=hr+1, h=30);
-  translate([0,0,30])
+  cylinder(r=hr+1, h=20);
+  translate([0,0,20])
   cylinder(r1=hr+1, r2=hr, h=3);
-  translate([0,0,33])
+  translate([0,0,23])
   cylinder(r=hr, h=3);
 
-  translate([0,0,36])
+  translate([0,0,26])
   cylinder(r1=hr, r2=hr+1, h=3);
-  translate([0,0,39])
+  translate([0,0,29])
   cylinder(r=hr+1, h=1);
   }
 
-  translate([-hr-2,-1,30])
+  translate([-hr-2,-1,20])
   cube([hr*2+4,2,40]);
   }
 
 
 }
 
-translate([150,0,0])
+translate([100,0,0])
 handle();
 
 
@@ -321,7 +321,7 @@ plate(2,2);
 */
 
 //SMALL GEAR 6 TEETH
-translate([90,0,0])
+translate([60,0,0])
 //translate([0,0,10])
 gear1((hr+dh/2)/2,.25);
 
@@ -346,7 +346,7 @@ gear1((hr+dh/2)/2,.25);
 //plug_cap();
 
 
-translate([-70,0,0])
+translate([-60,0,0])
 shaft();
 
 
