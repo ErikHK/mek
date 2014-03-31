@@ -268,6 +268,39 @@ translate([-fh/2,-30,0])
 shaft_test(length=3, hole=true);
 
 
+module hole_bar(length=4)
+{
+  width=hr*2;
+  th=3;
+  
+  len = (length-1)*(dh)+hr*2*(length-2);
+  
+  //outer width
+  ow = th+pgive*2;
+
+difference()
+{
+hull()
+  {
+  cylinder(r=width/2+ow,h=4);
+  translate([len+hr*2,0,0])
+  cylinder(r=width/2+ow,h=4);
+  }
+  
+
+  for(i=[0:length-1])
+  {
+  translate([i*dh+i*hr*2,0,-1])
+  cylinder(r=hr+pgive*2, h=10);
+  }
+}
+
+}
+
+translate([-fh/2,55,0])
+hole_bar();
+
+
 
 //width means rim width
 module spacer(height=4, width=4)
@@ -282,7 +315,7 @@ difference()
 }
 }
 
-translate([0,70,0])
+translate([0,80,0])
 spacer();
 
 
