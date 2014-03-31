@@ -269,7 +269,21 @@ shaft_test(length=3, hole=true);
 
 
 
-module spacer(height=4, )
+//width means rim width
+module spacer(height=4, width=4)
+difference()
+{
+{
+  cylinder(r=hr+pgive*2+width, h=height);
+
+  translate([0,0,-1])
+  cylinder(r=hr+pgive*2, h=height+2);
+
+}
+}
+
+translate([0,70,0])
+spacer();
 
 
 module arrow()
@@ -298,16 +312,16 @@ module handle()
   {
   union()
   {
-  cylinder(r=hr+1, h=20);
+  cylinder(r=hr+.5, h=20);
   translate([0,0,20])
-  cylinder(r1=hr+1, r2=hr, h=3);
+  cylinder(r1=hr+.5, r2=hr, h=3);
   translate([0,0,23])
   cylinder(r=hr, h=3);
 
   translate([0,0,26])
-  cylinder(r1=hr, r2=hr+1, h=3);
+  cylinder(r1=hr, r2=hr+.5, h=3);
   translate([0,0,29])
-  cylinder(r=hr+1, h=1);
+  cylinder(r=hr+.5, h=1);
   }
 
   translate([-hr-2,-1,20])
