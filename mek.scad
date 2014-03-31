@@ -181,7 +181,7 @@ cylinder(r=hr+pgive, h=7,$fn=4);
 
 }
 
-module shaft(length=dh, width=hr*2)
+module shaft(length=dh, width=hr*2, square1=false, square2=false)
 {
   //outer width
   ow = 3+pgive*2;
@@ -202,14 +202,74 @@ difference()
 
   //square hole
   translate([0,0,-1])
-  cylinder(r=hr+pgive*2,h=10, $fn=4);
+  if(square1)
+    cylinder(r=hr+pgive*2,h=10, $fn=4);
+  else
+    cylinder(r=hr+pgive*2,h=10);
   }
 }
 
+}
+
+module shaft_test(length=1, square1=false, square2=false, hole=true)
+{
+  th=3;
+  width=hr*2;
+  len = length*(dh)+hr*2*(length-1);
+  
+  //outer width
+  ow = th+pgive*2;
+
+  
 
 
+difference()
+{
+  hull()
+  {
+  cylinder(r=width/2+ow,h=4);
+  translate([len+hr*2,0,0])
+  cylinder(r=width/2+ow,h=4);
+  }
+
+  union(){
+  //hole in the middle
+  if(hole && length>1)
+  hull()
+  {
+  translate([2*hr+th,0,-1])
+  cylinder(r=hr+pgive*2, h=10);
+
+  translate([len-pgive*4-th,0,-1])
+  cylinder(r=hr+pgive*2, h=10);
+  }
+
+
+  //round hole on other end
+  translate([len+hr*2,0,-1])
+  if(square1)
+    cylinder(r=hr+pgive*2,h=10, $fn=4);
+  else
+    cylinder(r=hr+pgive*2,h=10);
+
+  //square hole
+  translate([0,0,-1])
+  if(square2)
+    cylinder(r=hr+pgive*2,h=10, $fn=4);
+  else
+    cylinder(r=hr+pgive*2,h=10);
+  }
+}
 
 }
+
+
+translate([-fh/2,-30,0])
+shaft_test(length=3, hole=true);
+
+
+
+module spacer(height=4, )
 
 
 module arrow()
@@ -227,8 +287,8 @@ cylinder(r=ghr, h=3);
 
 }
 
-//translate([120,0,0])
-//arrow();
+translate([120,0,0])
+arrow();
 
 
 //handle for the shaft
@@ -311,7 +371,7 @@ gear1( floor(((hr+dh/2)*4-hr-dh/2)/2) );
 
 
 //cylinder(r=5, h=100);
-plate(2,2);
+plate(4,2);
 
 /*
 translate([0,hr*4+dh*2,0])
@@ -321,7 +381,7 @@ plate(2,2);
 */
 
 //SMALL GEAR 6 TEETH
-translate([60,0,0])
+translate([0,-60,0])
 //translate([0,0,10])
 gear1((hr+dh/2)/2,.25);
 
@@ -346,8 +406,6 @@ gear1((hr+dh/2)/2,.25);
 //plug_cap();
 
 
-translate([-60,0,0])
-shaft();
 
 
 /*
