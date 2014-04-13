@@ -25,6 +25,9 @@ pitch=.25;
 //gear give (hole)
 ggive = .4;
 
+//spacer give
+spgive = .3;
+
 
 ////fastener sizes
 //notch width
@@ -149,7 +152,7 @@ module gear1(teeth=10, pitch=.25)
 {
   difference()
   {
-  linear_extrude(height=3)
+  linear_extrude(height=4)
   gear(number_of_teeth=teeth, diametral_pitch=pitch, flat=true);
 
   union()
@@ -253,25 +256,84 @@ difference()
   //round hole on other end
   translate([len+hr*2,0,-1])
   if(square1)
-    cylinder(r=hr+pgive,h=10, $fn=4);
+    cylinder(r=hr+ggive,h=10, $fn=6);
   else
-    cylinder(r=hr+pgive,h=10);
+    cylinder(r=hr+ggive,h=10);
 
   //square hole
   translate([0,0,-1])
   if(square2)
-    cylinder(r=hr+pgive*2,h=10, $fn=4);
+    cylinder(r=hr+pgive,h=10, $fn=6);
   else
-    cylinder(r=hr+pgive*2,h=10);
+    cylinder(r=hr+pgive,h=10);
   }
 }
 
 }
 
 
-translate([-fh/2,-30,0])
-shaft_test(length=1, hole=true);
 
+module shaft_test_spec(length=1, square1=false, square2=false, hole=true)
+{
+  th=3;
+  width=hr*2;
+  len = length*(dh)+hr*2*(length-1);
+  
+  //outer width
+  ow = th+pgive*2;
+
+  
+
+
+difference()
+{
+  hull()
+  {
+  cylinder(r=width/2+ow,h=4);
+  translate([len+hr*2,0,0])
+  cylinder(r=width/2+ow,h=4);
+  }
+
+  union(){
+  //hole in the middle
+  if(hole && length>1)
+  hull()
+  {
+  translate([2*hr+th,0,-1])
+  cylinder(r=hr+pgive, h=10);
+
+  translate([len-pgive*4-th,0,-1])
+  cylinder(r=hr+pgive, h=10);
+  }
+
+
+  //round hole on other end
+  translate([len+hr*2,0,-.001])
+  if(square1)
+    cylinder(r1=5+ggive, r2=8+ggive, h=4.1, $fn=6);
+  else
+    cylinder(r=hr+ggive,h=10);
+
+  //square hole
+  translate([0,0,-1])
+  if(square2)
+    cylinder(r=hr+pgive,h=10, $fn=6);
+  else
+    cylinder(r=hr+pgive,h=10);
+  }
+}
+
+}
+
+
+
+
+translate([-fh/2,-30,0])
+shaft_test(length=1, hole=true, square1=true);
+
+
+translate([-fh/2,-90,0])
+shaft_test(length=4, hole=true);
 
 module hole_bar(length=4)
 {
@@ -308,18 +370,18 @@ hole_bar();
 
 
 //width means rim width
-module spacer(height=4, width=4, hex=true)
+module spacer(height=4, width=2, hex=true)
 difference()
 {
 {
-  cylinder(r=hr+pgive+width, h=height);
+  cylinder(r=hr+spgive+width, h=height);
 
   translate([0,0,-1])
   
   if(hex)
-    cylinder(r=hr+pgive, h=height+2, $fn=6);
+    cylinder(r=hr+spgive, h=height+2, $fn=6);
   else
-    cylinder(r=hr+pgive, h=height+2);
+    cylinder(r=hr+spgive, h=height+2);
 
 }
 }
@@ -343,8 +405,8 @@ cylinder(r=ghr, h=3);
 
 }
 
-translate([120,0,0])
-arrow();
+//translate([120,0,0])
+//arrow();
 
 
 //handle for the shaft
@@ -373,8 +435,8 @@ module handle()
 
 }
 
-translate([100,0,0])
-handle();
+//translate([100,0,0])
+//handle();
 
 
 /*
@@ -471,6 +533,45 @@ gear1(12, .25);
 
 
 
+module spec_plate(holes=[1,0,4], size=[6,2])
+{
+
+length=4;
+
+width=hr*2;
+  th=2.5;
+  
+  len = (length-1)*(dh)+hr*2*(length-2);
+  
+  //outer width
+  ow = th+pgive*2;
+
+difference()
+{
+plate(size[0], size[1]);
+
+translate([-fh/2,fh/2,0])
+{
+
+translate([(hr*2+dh)*holes[0],(hr*2+dh)*(size[1]-1) - (hr*2+dh)*holes[1],0])
+hull()
+  {
+  cylinder(r=width/2+ggive,h=4);
+  //translate([len+hr*2,0,0])
+  translate([(hr*2+dh)*(holes[2]-1),0,0])
+  cylinder(r=width/2+ggive,h=4);
+  }
+}
+}
+
+}
+
+translate([0,150,0])
+spec_plate();
+
+
+
+
 
 translate([-50,30,0])
 {
@@ -480,3 +581,36 @@ cylinder(r=6, h=12, $fn=6);
 translate([-25,0,0])
 hex_nut(14,8,4,55,(hr*2)/sqrt(2)+.5+.3,0.5);
 }
+
+
+
+
+translate([-50,-30,0])
+{
+hex_screw((hr*2)/sqrt(2),4,55,15,1.5,2,12,2,3,0);
+translate([0,0,4])
+//cylinder(r=6, h=12, $fn=6);
+translate([-25,0,0])
+hex_nut(12,6,4,55,(hr*2)/sqrt(2)+.5+.3,0.5);
+}
+
+
+//SPECIALIZED SCREW!
+translate([-150,-30,0])
+{
+hex_screw((hr*2)/sqrt(2),4,55,15,1.5,2,12,0,3,0);
+translate([0,0,4])
+//cylinder(r=6, h=12, $fn=6);
+translate([-25,0,0])
+hex_nut(12,6,4,55,(hr*2)/sqrt(2)+.5+.3,0.5);
+
+translate([0,0,0])
+cylinder(r1=8, r2=5, h=4, $fn=6);
+
+translate([0,0,4])
+cylinder(r=5, h=4, $fn=6);
+
+translate([0,-20,0])
+shaft_test_spec(square1=true);
+}
+
