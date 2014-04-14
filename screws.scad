@@ -36,7 +36,7 @@ if(slanted_head)
 {
   translate([0,0,head_height])
   hex_screw(threaded_width,pitch,angle,threaded_length,1.5,2,head_width,0,non_threaded_length,0);
-  cylinder(r1=hr+slant, r2=hr, h=4, $fn=6);
+  cylinder(r1=hr+slant, r2=hr, h=head_height, $fn=6);
 }
 else
   hex_screw(threaded_width,pitch,angle,threaded_length,1.5,2,head_width,head_height,non_threaded_length,0);
@@ -103,7 +103,7 @@ shaft_test_spec(square1=true);
 
 //hex_screw(sw,p,ang,tl,1.5,2,hw,hh,nsl,0);
 
-screw(non_threaded_length=8, slanted_head=false);
+screw(non_threaded_length=12, threaded_length=15, head_height=3.85, slanted_head=true);
 
 translate([-20,0,0])
 nut();

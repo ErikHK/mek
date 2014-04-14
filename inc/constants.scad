@@ -21,7 +21,7 @@ fgive = .13;
 pitch=.25;
 
 //gear give (hole)
-ggive = .4;
+ggive = .7;
 
 //spacer give
 spgive = .3;

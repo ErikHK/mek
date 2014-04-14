@@ -4,7 +4,7 @@ include <inc/constants.scad>
 slant = 2;
 
 
-module bar(length=1, square=false, one_hole=true, slanted=false, holes=false)
+module bar(length=1, square=false, one_hole=true, slanted=false, holes=false, mirrorslanted=false)
 {
   th=3;
   width=hr*2;
@@ -69,6 +69,8 @@ difference()
   {
     if(slanted[length])
       cylinder(r1=hr+ggive,r2=hr+ggive+slant, h=4, $fn=6);
+    else if(mirrorslanted[length])
+      cylinder(r2=hr+pgive, r1=hr+pgive+slant, h=4, $fn=6);
     else
       cylinder(r=hr+ggive,h=4, $fn=6);
     
@@ -104,4 +106,7 @@ difference()
 
 }
 
-bar(length=3, one_hole=false, holes=true, square=[true,false,false,false], slanted=[true,true,false,true]);
+//bar(length=4, one_hole=true, holes=false, square=[true,false,false,false,true], slanted=[true,false,false,false,true]);
+
+
+bar(length=1, one_hole=true, holes=false, square=[true,true], slanted=[true,false], mirrorslanted=[true, true]);
