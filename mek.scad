@@ -1,5 +1,8 @@
 use <involute_gears.scad>
 use <polyScrewThread_r1.scad>
+use <plate.scad>
+use <gear1.scad>
+
 pi=3.1415;
 $fn=80;
 //hole radius
@@ -49,125 +52,7 @@ ghr = 1.4;
 //arrow length
 al = 8;
 
-
-module plate(width=5, height=5)
-{
-  
-
-  //total plate width
-  //tpw = (width)*2*hr+(width)*dh+hr*2;
-  tpw = (width)*2*hr+(width)*dh;
-
-  //total plate height
-  tph = (height)*2*hr+(height)*dh;
-
-
-  difference()
-  {
-  translate([-hr-dh/2,-hr-dh/2,0])
-  cube([tpw, tph, 4]);
-
-  union()
-  {
-  translate([0,0,-5])
-  for (i=[0:width-1])
-  {
-    for(j=[0:height-1])
-    {
-      translate([dh*i+2*hr*i-fh/2,j*(dh+2*hr)+fh/2,0])
-      cylinder(r=hr+pgive, h=15);
-    }
-  }
-  }
-  
-  union()
-  {
-  //side fastener holes
-  translate([hr+hr*2*(width-1)+dh*(width-1)+dh/2,-hr,0]){
-    for(i = [0:height-1])
-    {
-      translate([0,i*(dh+hr*2),0])
-      fastener(fgive);
-    }
-  }
-
-
-
-  //top fastener holes
-  translate([-fw,-hr-dh/2,0]){
-    for(i = [0:width-1])
-    {
-      translate([i*(dh+hr*2),0,0])
-      rotate([0,0,-90])
-      fastener(fgive);
-    }
-  }
-  }
-
-  }
-
-
-  //fasteners
-  module fastener(give=0)
-  {
-  rotate([0,0,90])
-  {
-  translate([-0,0,0])
-  linear_extrude(height=4)
-  polygon(points=[[0,0],[0,notchh-give],[-notchw-give,notchh-give],[-notchw-give,fh+notchh+give],[fw/2+give,fh+notchh+give], [fw/2+give,0]]);
-
-  translate([fw,0,0])
-  mirror([1,0,0])
-  linear_extrude(height=4)
-  polygon(points=[[0,0],[0,notchh-give],[-notchw-give,notchh-give],[-notchw-give,fh+notchh+give],[fw/2+give,fh+notchh+give], [fw/2+give,0]]);
-  }
-  }
-
-  //side fasteners
-  translate([-hr-dh/2,-hr,0]){
-    for(i = [0:height-1])
-    {
-      translate([0,i*(dh+hr*2),0])
-      fastener();
-    }
-  }
-
-  //top fasteners
-  translate([-fw,hr+hr*2*(height-1)+dh*(height-1)+dh/2,0]){
-    for(i = [0:width-1])
-    {
-      translate([i*(dh+hr*2),0,0])
-      rotate([0,0,-90])
-      fastener();
-    }
-  }
-
-
-}
-
-
-//GEEAAARSSS!!!
-
-module gear1(teeth=10, pitch=.25)
-{
-  difference()
-  {
-  linear_extrude(height=4)
-  gear(number_of_teeth=teeth, diametral_pitch=pitch, flat=true);
-
-  union()
-  {
-  translate([0,0,-5])
-  //cube([12/1.42,12/1.42,24],center=true);
-  cylinder(r=hr+ggive, h=24, $fn=6);
-  translate([teeth*2,0,-1])
-  cylinder(r=ghr+pgive,h=6);
-  }
-  }
-
-
-}
-
+/*
 module plug()
 {
 //base
@@ -189,35 +74,8 @@ cylinder(r=hr+pgive, h=7,$fn=4);
 
 }
 
-module shaft(length=dh, width=hr*2, square1=false, square2=false)
-{
-  //outer width
-  ow = 3+pgive*2;
+*/
 
-difference()
-{
-  hull()
-  {
-  cylinder(r=width/2+ow,h=4);
-  translate([length+hr*2,0,0])
-  cylinder(r=width/2+ow,h=4);
-  }
-
-  union(){
-  //round hole on other end
-  translate([length+hr*2,0,-1])
-  cylinder(r=hr+pgive*2,h=10);
-
-  //square hole
-  translate([0,0,-1])
-  if(square1)
-    cylinder(r=hr+pgive*2,h=10, $fn=4);
-  else
-    cylinder(r=hr+pgive*2,h=10);
-  }
-}
-
-}
 
 module shaft_test(length=1, square1=false, square2=false, hole=true)
 {
