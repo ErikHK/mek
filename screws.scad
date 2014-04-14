@@ -103,7 +103,7 @@ shaft_test_spec(square1=true);
 
 //hex_screw(sw,p,ang,tl,1.5,2,hw,hh,nsl,0);
 
-screw(non_threaded_length=12, threaded_length=15, head_height=3.85, slanted_head=true);
+screw(non_threaded_length=12.1, threaded_length=15, head_height=3.85, slanted_head=false);
 
 translate([-20,0,0])
 nut();
