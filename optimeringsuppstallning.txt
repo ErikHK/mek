@@ -1,0 +1,93 @@
+min x1/(2*x4)+x2/(2*x4)+x3/(2*x4)
+då  x1 + 3x3 >= 47.5
+    x1 + x2 >= 33.44
+    x1 + x1 >= 23.5
+    x4      <= 1
+    x4      >= .1
+    2*x4*x1   integer
+    2*x4*x2   integer
+    2*x4*x3   integer
+
+//test FAIL
+min x1+x2+x3
+då  x1 + 3x3 >= 47.5
+    x1 + x2 >= 33.44
+    x1 + x1 >= 23.5
+    
+
+
+//minimera avståndet mellan kuggen!!
+
+FINNS INGEN LÖSNING SÅ MAN FÅR x, 2x, 3x!!
+min 34-(x1+x2) + 48-(x1+x3) + 24-(2*x1) = 106-4*x1-x2-x3
+då  x1 + x3 >= 47.5
+    x1 + x2 >= 33.44
+    x1 + x1 >= 23.5
+
+    x1 + x2 <= 33.94
+    (x1 + x1 <= 24)
+    x1 + x3 <= 48
+
+    x2 - 2*x1 = 0
+    x3 - x1*3 = 0
+
+
+//pröva att få x, 2x, 3x fast ej diagonalt!
+min 34-(x1+x2) + 48-(x1+x3) + 24-(2*x1) = 106-4*x1-x2-x3
+då  x1 + x3 >= 47.5
+    x1 + x2 >= 53.1
+    x1  >= 11.75
+
+    x1 + x2 <= 53.6
+    x1 <= 14
+    x1 + x3 <= 48
+
+    x2 - 2*x1 = 0
+    x3 - x1*3 = 0
+
+
+
+
+
+min 34-(x1+x2) + 48-(x1+x3) + 24-(2*x1) - (x2+x4) = -4*x1-2*x2-x3-x4
+då  x1 + x3 >= 47.5
+    x1 + x2 >= 53.1
+    x1  >= 11.75
+
+    x1 + x2 <= 53.6
+    x1 <= 14
+    x1 + x3 <= 48
+
+    x2 - 2*x1 = 0
+    x3 - x1*3 = 0
+
+
+
+
+//simpelt optimeringstest för att se om det ens går med hypot och x1>12
+//NEJ DET GICK EJ!!
+min -(x1-x2)
+då	x1 + x2 <= hypodist
+	x1 	>= hr*2
+	x1 + x2 >= hypodist-gear_clear
+
+
+
+
+
+
+
+
+
+
+x1 x2 x3	radie
+x4		diametralpitch
+2*x4*x1		numteeth
+
+
+
+x1, x2, x3 = numteeth/(diampitch*2) = radie
+
+pitchrad = numteeth/(diampitch*2)
+
+numteeth integer

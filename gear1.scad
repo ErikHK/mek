@@ -15,7 +15,7 @@ module gear1(teeth=10, pitch=.25)
   translate([0,0,-5])
   //cube([12/1.42,12/1.42,24],center=true);
   cylinder(r=hr+ggive, h=24, $fn=6);
-  translate([teeth*2,0,-1])
+  translate([teeth/(pitch*2),0,-1])
   cylinder(r=ghr+pgive,h=6);
   }
   }
@@ -23,4 +23,4 @@ module gear1(teeth=10, pitch=.25)
 
 }
 
-gear1(6);
+//gear1(6);
