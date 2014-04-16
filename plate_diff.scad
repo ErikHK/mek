@@ -9,15 +9,17 @@ module plate(width=5, height=5)
 
   //total plate width
   //tpw = (width)*2*hr+(width)*dh+hr*2;
-  tpw = (width)*2*hr+(width)*dh;
+  tpw = (width)*2*hr+(width)*dhx;
 
   //total plate height
-  tph = (height)*2*hr+(height)*dh;
+  tph = (height)*2*hr+(height)*dhy;
 
+  echo("width",hr*2+dhx);
+  echo("height",hr*2+dhy);
 
   difference()
   {
-  translate([-hr-dh/2,-hr-dh/2,0])
+  translate([-hr-dhx/2,-hr-dhx/2,0])
   cube([tpw, tph, 4]);
 
   union()
@@ -27,7 +29,7 @@ module plate(width=5, height=5)
   {
     for(j=[0:height-1])
     {
-      translate([dh*i+2*hr*i-fh/2,j*(dh+2*hr)+fh/2,0])
+      translate([dhx*i+2*hr*i-fh/2,j*(dhy+2*hr)+fh/2,0])
       cylinder(r=hr+pgive, h=15);
     }
   }
@@ -50,7 +52,7 @@ module plate(width=5, height=5)
   translate([-fw,-hr-dh/2,0]){
     for(i = [0:width-1])
     {
-      translate([i*(dh+hr*2),0,0])
+      translate([i*(dhx+hr*2),0,0])
       rotate([0,0,-90])
       fastener(fgive);
     }
@@ -86,7 +88,7 @@ module plate(width=5, height=5)
   }
 
   //top fasteners
-  translate([-fw,hr+hr*2*(height-1)+dh*(height-1)+dh/2,0]){
+  translate([-fw,hr+hr*2*(height-1)+dhy*(height-1)+dhy/2,0]){
     for(i = [0:width-1])
     {
       translate([i*(dh+hr*2),0,0])
@@ -98,4 +100,4 @@ module plate(width=5, height=5)
 
 }
 
-plate(2,2);
+//plate(4,4);

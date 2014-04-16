@@ -6,6 +6,12 @@ hr = 6;
 //distance between holes
 dh = 12;
 
+//x distance between holes
+dhx = 12;
+
+//y distance between holes
+dhy = 14.4;
+
 //give between two gears
 giveg = .5;
 
@@ -21,7 +27,7 @@ fgive = .13;
 pitch=.25;
 
 //gear give (hole)
-ggive = .7;
+ggive = .35;
 
 //spacer give
 spgive = .3;

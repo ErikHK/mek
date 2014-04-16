@@ -204,7 +204,7 @@ a = [-(threedist-gear_clear)
     -hr*2*.98
     twodist
     threedist
-    hypo2dist
+    hypodist
     ];
 
 B = [-3 1 0 0;-5 0 1 0; 0 1 0 -2];
@@ -221,5 +221,69 @@ lb = zeros(3,1);
 x,lambda.ineqlin,lambda.lower
 
 8/(2*x(1))
+
+%%%%
+
+
+
+
+
+%%
+hr=6;
+dhx=12;
+dhy=14.4;
+
+onexdist = hr*2+dhx;
+oneydist = hr*2+dhy
+hypodist = sqrt(onexdist^2+oneydist^2);
+twoxdist = onexdist*2;
+twoydist = oneydist*2
+%hypo2dist = sqrt(5)*onedist;
+%hypo2dist
+
+gear_clear = .95;
+
+%x1 = 8 teeth
+%x2 = 12
+%x3 = 16
+%x4 = 24
+f = [4; 2; 1; 1];
+A = [-1 0 -1 0; %x1 + x3 >= hypodist-gear_clear
+    -1 0 0 -1; %x1 + x4 >= twoxdist-gear_clear
+    0 -1 0 -1; %x2 + x4 >= twoydist-gear_clear
+    -1 0 0 0; %x1 >= hr*2 
+    1 1 0 0; %x1 + x4 <= twoxdist
+    1 0 1 0; %x1 + x3 <= hypodist
+    0 1 0 1; %x2 + x4 <= twoydist
+    ];
+a = [-(hypodist-gear_clear)
+    -(twoxdist-gear_clear)
+    -(twoydist-gear_clear)
+    -hr*2*.98
+    twoxdist
+    hypodist
+    twoydist-.2
+    ];
+
+B = [-2 0 1 0; %
+    0 0 0 0;
+    0 -2 0 1
+    ];
+%B = [-2 1 0;0 0 0; 0 0 0];
+%B = [0 0 0;-3 0 1; 0 0 0];
+b = [0;0;0];
+lb = zeros(3,1);
+
+%[x,fval,exitflag,output,lambda] = linprog(f,A,b,[],[],lb);
+
+[x,fval,exitflag,output,lambda] = linprog(f,A,a,B,b,[],[],lb);
+
+
+x,lambda.ineqlin,lambda.lower
+
+8/(2*x(1))
+12/(2*x(2))
+16/(2*x(3))
+24/(2*x(4))
 
 %%%%
