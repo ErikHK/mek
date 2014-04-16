@@ -19,7 +19,7 @@ give = .2;
 
 //pitch = 0.335664335779307;
 //pitch = .3413;
-pitch = .342;
+pitch = .346;
 
 /*
 translate([6+12+6+give,0,0]){
