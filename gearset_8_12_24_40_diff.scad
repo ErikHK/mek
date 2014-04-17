@@ -9,7 +9,9 @@ arrow_depth=1;
 //.2 clearance on 12/24 teeth
 //pitch = 0.341325083143933;
 //more dist between 8 and 12
-pitch = .342;
+//pitch = .342;
+//more dist between 8 and 16
+pitch = .346;
 
 al=10;
 

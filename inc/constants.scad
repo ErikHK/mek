@@ -19,7 +19,7 @@ giveg = .5;
 sgive = .6;
 
 //plug give
-pgive = .12;
+pgive = .15;
 
 //fastener give (holes)
 fgive = .13;
@@ -27,7 +27,7 @@ fgive = .13;
 pitch=.25;
 
 //gear give (hole)
-ggive = .35;
+ggive = .45;
 
 //spacer give
 spgive = .3;
