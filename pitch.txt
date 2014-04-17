@@ -1,0 +1,7 @@
+diametral pitch = .25
+
+circp = 180/diamp
+
+diam = numteeth*circp/180 = numteeth/diamp
+
+rad = numteeth/(diamp*2)
