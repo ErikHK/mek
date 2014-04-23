@@ -1,3 +1,5 @@
+include <inc/constants.scad>
+
 // Parametric Involute Bevel and Spur Gears by GregFrost
 // It is licensed under the Creative Commons - GNU LGPL 2.1 license.
 // © 2010 by GregFrost, thingiverse.com/Amp
@@ -86,12 +88,12 @@ bevel_gear_back_cone = 1;
 module bevel_gear (
 	number_of_teeth=11,
 	cone_distance=100,
-	face_width=20,
+	face_width=4,
 	outside_circular_pitch=1000,
 	pressure_angle=30,
 	clearance = 0.2,
-	bore_diameter=5,
-	gear_thickness = 15,
+	bore_diameter=(hr+pgive)*2,
+	gear_thickness = 4,
 	backlash = 0,
 	involute_facets=0,
 	finish = -1)
@@ -222,7 +224,7 @@ module bevel_gear (
 		}
 
 		translate ([0,0,pitch_apex - apex_to_apex])
-		cylinder (r=bore_diameter/2,h=apex_to_apex);
+		cylinder (r=bore_diameter/2,h=apex_to_apex, $fn=6);
 	}
 }
 

@@ -105,5 +105,35 @@ shaft_test_spec(square1=true);
 
 screw(non_threaded_length=12.1, threaded_length=15, head_height=3.85, slanted_head=false);
 
+
+
 translate([-20,0,0])
 nut();
+
+
+nut_width=12;
+nut_height=8;
+pitch=4;
+angle=55;
+
+
+translate([0,50,0])
+{
+enlongated_nut();
+}
+
+module enlongated_nut(nut_width=hr*2*sin(60), nut_height=12, pitch=4, angle=55)
+{
+
+hex_nut(nut_width,nut_height,pitch,angle,hr*2/sqrt(2)+nut_give, 1.5);
+
+}
+
+module thread(height=32)
+{
+screw(non_threaded_length=0, threaded_length=height, head_height=0);
+
+}
+
+translate([30,30,0])
+thread();
