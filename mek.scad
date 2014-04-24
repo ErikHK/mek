@@ -7,7 +7,7 @@ use <gearset_8_12_24_40_diff.scad>
 use <spacer.scad>
 use <wheel.scad>
 
-/*
+
 /////SCREWS/////
 screw();
 translate([0,20,0])
@@ -34,8 +34,6 @@ enlongated_nut();
 
 
 }
-
-*/
 
 
 /////BARS/////
