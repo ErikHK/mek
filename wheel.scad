@@ -23,12 +23,12 @@ module wheel(rad=wheelrad, holes=6)
   //holes
   translate([0,0,-2])
   {
-    cylinder(r=hr+pgive, h=thickness+4, $fn=6);
+    cylinder(r=hr+ggive, h=thickness+4, $fn=6);
    
     for(i=[1:holes])
     {
       translate([dist*cos(i*interv), dist*sin(i*interv),1])
-      cylinder(r=hr+pgive, h=thickness+2);
+      cylinder(r=hr+ggive, h=thickness+2, $fn=6);
 
 
     }
@@ -41,18 +41,18 @@ module wheel(rad=wheelrad, holes=6)
 
 //print this in an elastic filament for best result
 //rim thickness means extra width besides thickness
-module tire(rim_thickness=1.5,give=1, rim_height=1.2, tire_thickness=1)
+module tire(rad=wheelrad, rim_thickness=1.5,give=1, rim_height=1.2, tire_thickness=1)
 {
 
-r1 = wheelrad+give-tire_thickness-rim_height;
-r2=wheelrad+give-tire_thickness;
+r1 = rad+give-tire_thickness-rim_height;
+r2=rad+give-tire_thickness;
 
 difference()
 {
-cylinder(r=wheelrad+tire_thickness+give, h=rim_thickness*4+thickness);
+cylinder(r=rad+tire_thickness+give, h=rim_thickness*4+thickness);
 
 translate([0,0,-1])
-cylinder(r=wheelrad+give-rim_height-tire_thickness, h=rim_thickness*4+thickness+2);
+cylinder(r=rad+give-rim_height-tire_thickness, h=rim_thickness*4+thickness+2);
 
 translate([0,0,rim_thickness])
 {
@@ -75,3 +75,10 @@ cylinder(r2=r1, r1=r2, h=rim_thickness);
 wheel();
 translate([50,50,0])
 tire();
+
+
+
+translate([-50,50,0])
+wheel(rad=3*hr, holes=0);
+translate([-50,-50,0])
+tire(rad=3*hr, rim_thickness=1, rim_height=1);
