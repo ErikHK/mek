@@ -52,3 +52,7 @@ ghr = 1.4;
 
 //arrow length
 al = 8;
+
+
+//give for the nut
+nut_give = .8;

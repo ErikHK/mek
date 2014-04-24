@@ -1,7 +1,6 @@
 include <inc/constants.scad>
 use <polyScrewThread_r1.scad>
 
-nut_give = .8;
 
 slant=2;
 
@@ -29,7 +28,7 @@ nsl = 8;
 
 
 
-module screw(head_width=14, head_height=4, threaded_length=15, threaded_width=hr*2/sqrt(2), pitch=4, angle=55, non_threaded_length=8, slanted_head=true)
+module screw(head_width=14, head_height=4, threaded_length=16, threaded_width=hr*2/sqrt(2), pitch=4, angle=55, non_threaded_length=8, slanted_head=true)
 {
 
 if(slanted_head)

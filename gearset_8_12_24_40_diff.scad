@@ -15,10 +15,12 @@ pitch = .346;
 
 al=10;
 
+
 gear1(teeth=8, pitch=pitch);
 
-translate([40,0,0])
+module 12_teeth(pitch=pitch)
 {
+
 difference()
 {
   gear1(teeth=12, pitch=pitch);
@@ -30,14 +32,13 @@ scale(12/16)
 arrow(peg=false);
 
 }
+
 }
 
-//16 teeth
-al=10;
-translate([70,-40,0])
-{
 
-difference()
+module 16_teeth(pitch=pitch)
+{
+  difference()
 {
 gear1(teeth=16, pitch=pitch);
 color("red")
@@ -45,6 +46,36 @@ translate([(16/(pitch*2)-hr)/2,0,4-arrow_depth])
 rotate([0,0,-90])
 arrow(peg=false);
 }
+
+}
+
+module 24_teeth(pitch=pitch)
+{
+difference()
+{
+gear1(teeth=24, pitch=pitch);
+
+color("red")
+translate([(16/(pitch*2))/2,0,4-arrow_depth])
+rotate([0,0,-90])
+scale(24/16)
+arrow(peg=false);
+
+}
+
+
+}
+
+translate([40,0,0])
+{
+12_teeth();
+}
+
+//16 teeth
+al=10;
+translate([70,-40,0])
+{
+16_teeth();
 }
 
 //24 teeth
