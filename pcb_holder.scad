@@ -1,5 +1,7 @@
 //include <roundCornersCube.scad>
 
+
+include <inc/constants.scad>
 nRF24L01_hole = [15.2+3,33+3, 1.6+3];
 
 nRF24L01pos = [26.67, 24.13];
@@ -69,6 +71,7 @@ screw_dist(height-.8);
 
 translate([-33.02,8.89,0])
 screw_dist(height-.8);
+
 }
 
 difference()
@@ -109,6 +112,38 @@ translate(vinpos)
 cube([vinw,vinh,5]);
 }
 }
+
+module fastener(width=dhx, thickness=4)
+{
+//HOLES FOR FASTENING
+translate([0,4,0])
+{
+difference()
+{
+union()
+{
+translate([(hr*2+3),0,-bottom_thickness])
+cylinder(r=hr+thickness, h=4);
+
+translate([6,5,0])
+cube([15,hr+width,4]);
+
+translate([(hr*2+3),hr*2+width,-bottom_thickness])
+cylinder(r=hr+thickness, h=4);
+}
+
+translate([(hr*2+3),hr*2+width,-bottom_thickness])
+cylinder(r=hr+pgive, h=6, $fn=6);
+
+translate([(hr*2+3),0,0])
+cylinder(r=hr+pgive, h=6, $fn=6);
+}
+}
+
+}
+
+translate([2,0,0])
+fastener(dhy);
 
 
 module pcb_minkowski(height=5)
@@ -166,8 +201,13 @@ translate([70,0,0])
 top_box();
 
 
+/*
 translate([40,0,0])
 cylinder(r=28.5/2, h=2);
+*/
+
+
+
 
 
 //cube(nRF24L01_hole);
