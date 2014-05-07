@@ -1,6 +1,7 @@
 include <inc/constants.scad>
 use <polyScrewThread_r1.scad>
 
+nut_give = .4;
 
 slant=2;
 
@@ -28,7 +29,7 @@ nsl = 8;
 
 
 
-module screw(head_width=14, head_height=4, threaded_length=16, threaded_width=hr*2/sqrt(2), pitch=4, angle=55, non_threaded_length=8, slanted_head=true)
+module screw(head_width=14, head_height=4, threaded_length=15, threaded_width=hr*2/sqrt(2), pitch=4, angle=55, non_threaded_length=8, slanted_head=true)
 {
 
 if(slanted_head)
@@ -41,8 +42,8 @@ else
   hex_screw(threaded_width,pitch,angle,threaded_length,1.5,2,head_width,head_height,non_threaded_length,0);
 
 
-translate([0,0,head_height])
-cylinder(r=hr, h=non_threaded_length, $fn=6);
+translate([0,0,head_height-.1])
+cylinder(r=hr, h=non_threaded_length+.2, $fn=6);
 
 }
 
@@ -102,12 +103,25 @@ shaft_test_spec(square1=true);
 
 //hex_screw(sw,p,ang,tl,1.5,2,hw,hh,nsl,0);
 
-screw(non_threaded_length=12.1, threaded_length=15, head_height=3.85, slanted_head=false);
-
-
+screw(non_threaded_length=0, threaded_length=16+8, head_height=3.85, slanted_head=false);
 
 translate([-20,0,0])
 nut();
+
+
+
+//SMALL THREADS TEST
+translate([0,50,0])
+{
+screw(non_threaded_length=0, threaded_length=10, head_height=3.85, slanted_head=false, angle=42, pitch=2);
+
+translate([-20,0,0])
+nut(angle=42, pitch=2);
+
+
+
+}
+
 
 
 nut_width=12;
@@ -115,13 +129,14 @@ nut_height=8;
 pitch=4;
 angle=55;
 
-
+/*
 translate([0,50,0])
 {
 enlongated_nut();
 }
+*/
 
-module enlongated_nut(nut_width=hr*2*sin(60), nut_height=12, pitch=4, angle=55)
+module enlongated_nut(nut_width=hr*2*sin(60), nut_height=16+8, pitch=4, angle=55)
 {
 
 hex_nut(nut_width,nut_height,pitch,angle,hr*2/sqrt(2)+nut_give, 1.5);
@@ -134,5 +149,8 @@ screw(non_threaded_length=0, threaded_length=height, head_height=0);
 
 }
 
+
+/*
 translate([30,30,0])
 thread();
+*/

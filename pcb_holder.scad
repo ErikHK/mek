@@ -59,7 +59,7 @@ polygon(points=[[0,0],[0,40.64],[-46.99,40.64],[-46.99,17.78],[-29.21,0]]);
 
 }
 
-module bottom_box(height=5, bottom_thickness=1)
+module bottom_box(height=6.5, bottom_thickness=2)
 {
 translate([-3.81,3.81,bottom_thickness])
 {
@@ -76,7 +76,7 @@ difference()
 minkowski()
 {
 //cylinder(r=2.5,h=height);
-cylinder(r=2.5,h=height);
+cylinder(r=4.5,h=height);
 pcb();
 }
 
@@ -100,13 +100,13 @@ bottom_box();
 translate([0,0,-2])
 {
 translate(vccpos)
-cube([vccw,vcch,3]);
+cube([vccw,vcch,5]);
 
 translate(motorpos)
-cube([motorw,motorh,3]);
+cube([motorw,motorh,5]);
 
 translate(vinpos)
-cube([vinw,vinh,3]);
+cube([vinw,vinh,5]);
 }
 }
 

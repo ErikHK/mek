@@ -72,4 +72,4 @@ fasteners(dist=dhy, w=false);
 
 }
 
-plate(2,2);
+plate(2,4);

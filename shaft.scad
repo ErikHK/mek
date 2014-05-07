@@ -109,4 +109,6 @@ difference()
 //bar(length=4, one_hole=true, holes=false, square=[true,false,false,false,true], slanted=[true,false,false,false,true]);
 
 
-bar(length=1, one_hole=true, holes=false, square=[true,true], slanted=[true,false], mirrorslanted=[true, true]);
+//bar(length=1, one_hole=true, holes=false, square=[true,true], slanted=[true,false], mirrorslanted=[true, true]);
+
+bar(length=4, one_hole=false, holes=true);
