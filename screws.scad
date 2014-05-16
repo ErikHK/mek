@@ -1,7 +1,7 @@
 include <inc/constants.scad>
 use <polyScrewThread_r1.scad>
 
-nut_give = .4;
+nut_give = .5;
 
 slant=2;
 
@@ -103,7 +103,7 @@ shaft_test_spec(square1=true);
 
 //hex_screw(sw,p,ang,tl,1.5,2,hw,hh,nsl,0);
 
-screw(non_threaded_length=0, threaded_length=16+8, head_height=3.85, slanted_head=false);
+screw(non_threaded_length=22+4-.2+4, threaded_length=16, head_height=3.85, slanted_head=false);
 
 translate([-20,0,0])
 nut();
@@ -113,10 +113,10 @@ nut();
 //SMALL THREADS TEST
 translate([0,50,0])
 {
-screw(non_threaded_length=0, threaded_length=10, head_height=3.85, slanted_head=false, angle=42, pitch=2);
+screw(non_threaded_length=0, threaded_length=10, head_height=3.85, slanted_head=false, angle=50, pitch=2);
 
 translate([-20,0,0])
-nut(angle=42, pitch=2);
+nut(angle=50, pitch=2);
 
 
 
