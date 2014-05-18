@@ -19,7 +19,10 @@ giveg = .5;
 sgive = .6;
 
 //plug give
-pgive = .15;
+//pgive = .15;
+
+pgive = .12;
+
 
 //fastener give (holes)
 fgive = .13;
