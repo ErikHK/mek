@@ -61,8 +61,23 @@ polygon(points=[[0,0],[0,40.64],[-46.99,40.64],[-46.99,17.78],[-29.21,0]]);
 
 }
 
+module distances(height=6.5, bottom_thickness=2)
+{
+translate([-3.81,3.81,0])
+{
+screw_dist(height-.8);
+translate([0,33.02,0])
+screw_dist(height-.8);
+
+translate([-33.02,8.89,0])
+screw_dist(height-.8);
+}
+}
+
+
 module bottom_box(height=6.5, bottom_thickness=2)
 {
+
 translate([-3.81,3.81,bottom_thickness])
 {
 screw_dist(height-.8);
@@ -71,6 +86,8 @@ screw_dist(height-.8);
 
 translate([-33.02,8.89,0])
 screw_dist(height-.8);
+
+//distances();
 
 }
 
