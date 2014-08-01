@@ -40,6 +40,9 @@ difference()
   {
     for(i=[1:length-1])
   {
+
+  if(holes[i])
+  {
   translate([i*dh+i*hr*2,0,0])
   if(square[i])
   {
@@ -59,11 +62,14 @@ difference()
   }
   
   }
+  }
 
   }
 
   
   //hole on other end
+  if(holes[length])
+  {
   translate([len+hr*2,0,0])
   if(square[length])
   {
@@ -82,8 +88,11 @@ difference()
     else
       cylinder(r=hr+pgive,h=4);
   }
+  }
 
   //first hole
+  if(holes[0])
+  {
   translate([0,0,0])
   if(square[0])
   {
@@ -100,7 +109,7 @@ difference()
     else
       cylinder(r=hr+pgive,h=4);
   }
-
+  }
   }
 }
 
