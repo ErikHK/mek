@@ -11,6 +11,7 @@ dhx = 12;
 
 //y distance between holes
 dhy = 14.4;
+//dhy=20;
 
 //give between two gears
 giveg = .5;
