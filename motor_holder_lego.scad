@@ -1,6 +1,12 @@
 include <inc/constants.scad>
 use <shaft.scad>
 use <gear1.scad>
+use <../scad/block-120713.scad>
+
+
+//translate([])
+//rotate([90,0,0])
+block(2,5,1,axle_hole=false,reinforcement=true);
 
 //inner radius
 //ir = 13;
@@ -16,7 +22,7 @@ hh = 30;
 rt = 1;
 
 //fastener width
-fw = 4;
+fw = 3;
 
 //nut hole radius
 nhr = 9.5/2;
@@ -137,9 +143,11 @@ cylinder(r=ir, h=hh+.2);
 }
 
 }
+//translate([0,0,(ir+ot)/2])
+//rotate([-90,0,0])
+//motor_holder(vertical=true);
 
-rotate([-90,0,0])
-motor_holder(vertical=true);
+//holder_housing();
 
 /*
 translate([30,40,0])

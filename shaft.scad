@@ -120,4 +120,6 @@ difference()
 
 //bar(length=1, one_hole=true, holes=false, square=[true,true], slanted=[true,false], mirrorslanted=[true, true]);
 
-bar(length=4, one_hole=false, holes=true);
+//bar(length=4, one_hole=false, holes=true);
+
+bar(holes=[true,true]);

@@ -1,7 +1,7 @@
 include <inc/constants.scad>
 
 
-module plate(width=2, height=2)
+module plate(width=2, height=2, holes=true)
 {
 //total width (sans holders)
 twidth = width*dhx+width*2*hr;
@@ -22,8 +22,11 @@ cube([twidth, theight,4]);
   {
     for(j=[0:height-1])
     {
+		if(holes)
+      {
       translate([i*hr*2+dhx*i,j*hr*2+j*dhy,0])
       cylinder(r=hr+pgive, h=10);
+      }
       
     }
   }
@@ -72,4 +75,4 @@ fasteners(dist=dhy, w=false);
 
 }
 
-plate(4,2);
+plate(4,4);

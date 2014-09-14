@@ -58,6 +58,27 @@ cube([fh,dhx+fh-fw/2+dhx,4]);
 }
 }
 
+module full_male()
+{
+difference()
+{
+plate(2,2, holes=false);
+translate([-5,16.7-40,-.1])
+cube([60,60,5]);
+}
+}
+
+
+module full_female()
+{
+difference()
+{
+plate(2,2, holes=false);
+translate([-5,16.2,-.1])
+cube([60,60,5]);
+}
+}
+
 
 //translate([-4,4+3,0])
 //rotate([90,0,0])
@@ -65,4 +86,11 @@ male();
 
 translate([40,0,0])
 female();
+
+translate([0,40,0])
+full_female();
+
+
+translate([55,-5,0])
+full_male();
 

@@ -4,7 +4,7 @@ use <shaft.scad>
 
 module spacer(squares=[true])
 {
-  bar(length=0, square=squares);
+  bar(length=0, square=squares, holes=[true]);
 
 }
 

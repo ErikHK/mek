@@ -48,7 +48,8 @@ cylinder(r=hr, h=non_threaded_length+.2, $fn=6);
 }
 
 
-module nut(nut_width=12, nut_height=6, pitch=4, angle=55)
+
+module nut(nut_width=12, nut_height=8, pitch=4, angle=55)
 {
 hex_nut(nut_width,nut_height,pitch,angle,hr*2/sqrt(2)+nut_give, 1.5);
 
@@ -103,13 +104,13 @@ shaft_test_spec(square1=true);
 
 //hex_screw(sw,p,ang,tl,1.5,2,hw,hh,nsl,0);
 
-screw(non_threaded_length=22+4-.2+4, threaded_length=16, head_height=3.85, slanted_head=false);
+screw(non_threaded_length=8+.1, threaded_length=16, head_height=3.85, slanted_head=false);
 
 translate([-20,0,0])
 nut();
 
 
-
+/*
 //SMALL THREADS TEST
 translate([0,50,0])
 {
@@ -117,11 +118,8 @@ screw(non_threaded_length=0, threaded_length=10, head_height=3.85, slanted_head=
 
 translate([-20,0,0])
 nut(angle=50, pitch=2);
-
-
-
 }
-
+*/
 
 
 nut_width=12;
@@ -129,12 +127,12 @@ nut_height=8;
 pitch=4;
 angle=55;
 
-/*
+
 translate([0,50,0])
 {
-enlongated_nut();
+enlongated_nut(nut_height=8);
 }
-*/
+
 
 module enlongated_nut(nut_width=hr*2*sin(60), nut_height=16+8, pitch=4, angle=55)
 {

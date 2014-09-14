@@ -28,7 +28,7 @@
 uint8_t *data;
 uint8_t test = 0;
 
-uint8_t values[2] = {0x00, 0x93};
+uint8_t values[3] = {0x00, 0x94, 0x93};
 
 
 void InitSPI(void)
@@ -168,9 +168,9 @@ void nrf24L01_init(void)
 	
 	//choose if transmitter or receiver!
 	//TRANSMITTER
-	val[0] = 0x1E;
+	//val[0] = 0x1E;
 	//RECEIVER
-	//val[0] = 0x1F;
+	val[0] = 0x1F;
 	WriteToNrf(W, CONFIG, val, 1);
 	
 	
@@ -296,11 +296,17 @@ int main(void)
 {
 	//DDRD = 0xff;
 	//DDRB = 0xff;
-	DDRD |= (1<<DDB5);
-	DDRD |= (1<<DDD4);
 	DDRD |= (1<<DDD5);
+	DDRD |= (1<<DDD4);
+	DDRD |= (1<<DDD1);
 	
 	DDRB |= (1<<DDB2);
+	
+	//receiver!
+	
+	DDRB |= (1<<DDB2);
+	DDRB |= (1<<DDB3);
+	DDRB |= (1<<DDB4);
 	
 	//PD4 - ENABLE 1
 	SETBIT(PORTD, 4);
@@ -308,6 +314,15 @@ int main(void)
 	SETBIT(PORTB, 2);
 	//PD5 - INPUT 2			PIN 7
 	CLEARBIT(PORTD, 5);
+	//PD1 - ENABLE 2		PIN 9
+	SETBIT(PORTD, 1);
+	//PB3 - INPUT 3			PIN 10
+	SETBIT(PORTB, 3);
+	//PB4 - INPUT 4			PIN 15
+	CLEARBIT(PORTB, 4);
+	
+	
+	
 	
 	//PORTB = 0xff;
 	//PORTD = 0xff;
@@ -315,38 +330,49 @@ int main(void)
 	InitSPI();
 	nrf24L01_init();
 	
-	
 	//flash LED
 	SETBIT(PORTD, 5);
 	_delay_ms(1000);
 	CLEARBIT(PORTD, 5);
 	
 	
-	
+	/*
 	//BUTTONS FOR TRANSMITTER!
 	CLEARBIT(DDRB, DDB2);
-	CLEARBIT(DDRB, DDB3);
+	CLEARBIT(DDRD, DDD5);
 	
 	//enable pull-up!
 	SETBIT(PORTB, 2);
-	SETBIT(PORTB, 3);
-	
+	SETBIT(PORTD, 5);
+	*/
 	
     while(1)
     {
-		
+		test=0;
 		//_delay_ms(100);
+		//IF TRANSMITTER!
+		/*
+		//if other button is pressed
+		if ((PIND & (1<<PD5)) == 0)
+		//SETBIT(PORTD, 5);
+		test = 2;
+		//else
+		//test = 0;
+		
+		_delay_ms(10);
+		
 		
 		//if button is pressed
 		if ((PINB & (1<<PB2)) == 0)
 		//SETBIT(PORTD, 5);
-		  test = 1;
-		else
-		  test = 0;
+		test = 1;
+		//else
+		//test = 0;
+		
 
 		_delay_ms(10);
 		
-		//IF TRANSMITTER!
+		
 		//nrf24L01_init();
 		reset();
 		reset_tx();
@@ -358,14 +384,14 @@ int main(void)
 		}
 		transmit_payload(W_buffer);
 		
-		
+		*/
 		
 		
 		
 		
 		
 		//IF RECEIVER!
-		/*
+		
 		reset();
 		receive_payload();
 		
@@ -392,15 +418,37 @@ int main(void)
 			
 		}
 		
-		//shut off LED! nein, shut off motor!
+		if(data[1] == 0x94)
+		{
+			/*
+			//other motor!
+			//PD1 - ENABLE 2		PIN 9
+			SETBIT(PORTD, 1);
+			//PB3 - INPUT 3			PIN 10
+			SETBIT(PORTB, 3);
+			//PB4 - INPUT 4			PIN 15
+			CLEARBIT(PORTB, 4);
+			*/
+			//change direction instead
+			//PD4 - ENABLE 1		PIN 1
+			SETBIT(PORTD, 4);
+			//PB2 - INPUT 1			PIN 2
+			CLEARBIT(PORTB, 2);
+			//PD5 - INPUT 2			PIN 7
+			SETBIT(PORTD, 5);
+			
+		}
+		
+		//shut off LED! nein, shut off motors!
 		if (data[1] == 0x00)
 		{
 			SETBIT(PORTD, 5);
-			//CLEARBIT(PORTD, 4);
+			SETBIT(PORTB, 4);
+			CLEARBIT(PORTD, 4);
 			//PB2 - INPUT 1			PIN 2
 			//CLEARBIT(PORTB, 2);
 		}		
-		*/
+		
 		
 		/*
 		_delay_ms(1000);

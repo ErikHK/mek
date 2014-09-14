@@ -9,7 +9,7 @@ hwth = 2;
 
 module blade(th=2, length=20)
 {
-linear_extrude(height=h, twist=65, convexity=200, $fn=100)
+linear_extrude(height=h, twist=-65, convexity=200, $fn=100)
 square([length,th]);
 
 }

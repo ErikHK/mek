@@ -4,11 +4,12 @@ include <inc/constants.scad>
 
 
 
-module bracket(length=2, height=2)
+module bracket(length=2, height=2, depth=1)
 {
 
 
-  rotate([-90,0,0])
+  module part()
+  {
   difference()
   {
   union()
@@ -29,11 +30,20 @@ module bracket(length=2, height=2)
 
 
   }
+  }
+
+  for(i=[0:depth-1])
+  {
+  translate([0,0,i*(hr*4)])
+  rotate([-90,0,0])
+  
+  part();
+  }
   
 
 }
 
-bracket();
+bracket(length=1, height=1, depth=2);
 
 /*
 translate([0,70,0])
