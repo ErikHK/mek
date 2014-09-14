@@ -6,7 +6,7 @@ use <../scad/block-120713.scad>
 
 //translate([])
 //rotate([90,0,0])
-block(2,5,1,axle_hole=false,reinforcement=true);
+//block(2,5,1,axle_hole=false,reinforcement=true);
 
 //inner radius
 //ir = 13;
@@ -74,7 +74,7 @@ cube([(ir+ot)*2, ir+ot, hh]);
 
 if(vertical)
 {
-translate([-hr*6,ir+ot,hh/2])
+translate([-hr*4,ir+ot,hh/2])
 rotate([90,0,0])
 fastener();
 }
@@ -95,14 +95,15 @@ translate([0,0,0])
 rotate([0,0,180])
 nut_hole();
 
-translate([0,0,0])
-rotate([0,0,90])
-nut_hole();
+//translate([0,0,0])
+//rotate([0,0,90])
+//nut_hole();
 
 
 translate([0,0,0])
 rotate([0,0,-90])
 nut_hole();
+
 }
 
 }
@@ -112,7 +113,9 @@ nut_hole();
 
 module fastener()
 {
-bar(length=fw-1, one_hole=false, holes=[true,false,false,true]);
+//bar(length=fw-1, one_hole=false, holes=[true,false,true]);
+translate([hr*4,0,-9.5/3])
+block(4,5,1,axle_hole=false,reinforcement=true);
 }
 
 module motor_holder(vertical=false)
@@ -144,8 +147,8 @@ cylinder(r=ir, h=hh+.2);
 
 }
 //translate([0,0,(ir+ot)/2])
-//rotate([-90,0,0])
-//motor_holder(vertical=true);
+rotate([-90,0,0])
+motor_holder(vertical=true);
 
 //holder_housing();
 
